@@ -76,6 +76,18 @@ java MainB
 
 This time, printingThread displays 1000000 every time, showing that it successfully waits for incrementingThread to finish before printing.
 
+### Task 2C : Implement a waiting with guarded block
+
+Source files:
+
+- `task2/MainC.java` (main file)
+
+To compile and execute:
+```
+javac MainC.java
+java MainB
+```
+
 ## Task 3: Producer-Consumer Buffer using Condition Variables
 
 ## Task 4: Counting Semaphore
