@@ -48,6 +48,20 @@ In figure 1, we see how the execution time scaled with the number of threads.
 
 ## Task 2: Guarded blocks using wait()/notify()
 
+### Task 2A : Implement asynchronous sender-receiver
+
+Source files:
+
+- `task2/MainA.java` (main file)
+
+To compile and execute:
+```
+javac MainA.java
+java MainA
+```
+
+When executing it several times, we can see that printingThread prints different values every time (3737, 3679, 3320...). These values are low and far from 1000000, showing that both threads are executing asynchronously.
+
 ## Task 3: Producer-Consumer Buffer using Condition Variables
 
 ## Task 4: Counting Semaphore
