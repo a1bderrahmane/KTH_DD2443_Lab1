@@ -62,6 +62,20 @@ java MainA
 
 When executing it several times, we can see that printingThread prints different values every time (3737, 3679, 3320...). These values are low and far from 1000000, showing that both threads are executing asynchronously.
 
+### Task 2B : Implement busy-waiting receiver 
+
+Source files:
+
+- `task2/MainB.java` (main file)
+
+To compile and execute:
+```
+javac MainB.java
+java MainB
+```
+
+This time, printingThread displays 1000000 every time, showing that it successfully waits for incrementingThread to finish before printing.
+
 ## Task 3: Producer-Consumer Buffer using Condition Variables
 
 ## Task 4: Counting Semaphore
