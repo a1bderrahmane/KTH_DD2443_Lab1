@@ -10,9 +10,9 @@ public class MainC {
 			for (int i = 0; i < 1000000; i++) {
 				sharedInt++;
 			}
-			// Incrementer has finished
-			done = true;
 			synchronized(monitor) {
+				// Incrementer has finished
+				done = true;
 				// wakes up the printer
 				System.out.println("[Incrementer] I notify printer");
 				monitor.notify();
