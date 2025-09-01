@@ -85,8 +85,38 @@ Source files:
 To compile and execute:
 ```
 javac MainC.java
-java MainB
+java MainC
 ```
+
+### Task 2D : Explore the effects of guarded block on performance
+
+Source files:
+
+- `task2/MainDB.java` (main file for program B)
+- `task2/MainDC.java` (main file for program C)
+
+To compile and execute:
+```
+javac MainDB.java MainDC.java
+java MainDB
+java MainDC
+```
+
+Measures for program B (in ns) :
+```
+34928, 40751, 38291, 24671, 36764, 40127, 58631, 43821, 33215, 37877, 36997, 38017
+```
+
+Measures for program C (in ns) :
+```
+44380, 40295, 21968, 44312, 19090, 37773, 41775, 21185, 23213, 43906, 18339, 23270
+```
+
+Means :
+- `38674 ns` for program B
+- `31625 ns` for program C
+
+Considering that program C (guarded blocks) has to execute extra operations such as taking a lock to enter the `synchronized` block, we can see that using guarded blocks to implement a waiting globaly saves some time compared to a busy-waiting approach. But it seems to decrease the execution time only for some executions, whereas the others has times close to the mean of program B. We can thus deduce that the time saved by guarded blocks is dependant of the thread schedule chosen by JVM.
 
 ## Task 3: Producer-Consumer Buffer using Condition Variables
 
