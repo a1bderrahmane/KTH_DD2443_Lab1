@@ -1,5 +1,3 @@
-package B;
-import Utils.Utils;
 public class MainB {
     public volatile static int x;
     public final static int NbIterations = 10_000_000;
