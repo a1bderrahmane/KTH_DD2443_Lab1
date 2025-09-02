@@ -58,7 +58,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-		// Deadlock possibility
+		// //Deadlock possibility
         // Thread t1 = new Thread(new Runner1());
         // Thread t2 = new Thread(new Runner1());
         // t1.start();
