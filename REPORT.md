@@ -120,6 +120,28 @@ Considering that program C (guarded blocks) has to execute extra operations such
 
 ## Task 3: Producer-Consumer Buffer using Condition Variables
 
+Source files:
+
+- `task3/BufferClosedException.java`
+- `task3/Buffer.java`
+- `task3/Main.java` (main program)
+
+To compile and execute:
+```
+javac Main.java
+java Main
+```
+
+We have implemented a FIFO buffer with an array and two indexes :
+- `producerIndex` pointing on the next available space of the array
+- `consumerIndex` pointing on the next space to be read
+
+If both indexes are equal it can means that the buffer is rather full, rather empty. Thus we have added another boolean variable `bufferEmpty` to distinguish those two cases.
+
+A final boolean variable `bufferClosed` is here to handle buffer closure.
+
+Condition variable `notFull` (respectively `notEmpty`) is used by producer thread (respectively consumer thread) to wait if buffer is full (respectively empty).
+
 ## Task 4: Counting Semaphore
 
 ## Task 5: Dining Philosophers
