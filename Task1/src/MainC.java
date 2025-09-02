@@ -1,8 +1,6 @@
-package C;
 import java.util.Arrays;
 import java.nio.file.*;
 import java.nio.charset.StandardCharsets;
-import Utils.Utils;
 public class MainC {
     public volatile static int x;
     public final static int NbIterations = 10_000_000;
@@ -114,9 +112,9 @@ public class MainC {
                 elapsed_Y[i] = run_experiment(n);
             }
 
-            double meanX =Utils. computeMean(elapsed_X);
+            double meanX = Utils.computeMean(elapsed_X);
             double varX = Utils.computeVariance(elapsed_X, meanX);
-            double meanY =Utils. computeMean(elapsed_Y);
+            double meanY = Utils.computeMean(elapsed_Y);
             double varY = Utils.computeVariance(elapsed_Y, meanY);
 
             sb.append(n).append(",")
