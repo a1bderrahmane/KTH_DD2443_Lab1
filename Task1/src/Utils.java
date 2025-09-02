@@ -1,5 +1,4 @@
-package Utils;
-public class Utils {
+public  class Utils {
     public static Thread[] initThread(Runnable runnable,int n) {
         Thread[] threads = new Thread[n];
         for (int i = 0; i < n; i++) {
