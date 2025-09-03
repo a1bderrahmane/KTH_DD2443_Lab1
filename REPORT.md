@@ -9,39 +9,46 @@
 
 Source files:
 
-- `task1/MainA.java` (main file)
+- `task1/src/MainA.java` (main file)
 
 To compile and execute:
 ```
-javac MainA.java
-java MainA
+javac src/MainA.java src/Utils.java
+java src/MainA
 ```
-
+In this task we expect the threads to overwrite each time the incremented value , with a final result being less then the result obtained if the program was to run sequentially .
 ### Task 1b: Synchronized keyword
 Source files:
 
-- `task1/MainB.java` (main file)
+- `task1/src/MainB.java` (main file)
 
 To compile and execute:
 ```
-javac MainB.java
-java MainB
+javac src/MainB.java src/Utils.java
+java src/MainB
 ```
-
+After adding the `synchronized` keyword, we prevent the threads from overwriting the variable. As a result, we now get a result similar to running the program sequentially.
 ### Task 1c: Synchronization performance
 
 Source files:
 
-- `task1/MainC.java` (main file)
+- `task1/src/MainC.java` (main file)
 
 To compile and execute:
 ```
-javac MainC.java
-java MainC <N>
+javac src/MainC.java src/Utils.java
+java src/MainC <N>
 ```
 Where `N` is number of threads to execute with.
 
-In figure 1, we see how the execution time scaled with the number of threads.
+
+Figures 1 and 2 show heatmaps of the variance for variables X and Y. The highest variance for X occurs at X=3, while the lowest variance for Y is at Y=30. Therefore, using X=3 as a warmup value helps the system become more consistent in subsequent runs.
+![Variance of X ](task1/src/X_Y_stats/heat_varianceX.png)
+![Variance of Y](task1/src/X_Y_stats/heat_varianceY.png)
+
+
+
+In figure 3, we see how the execution time scaled with the number of threads.
 ...
 
 ![My plot for task 1c](data/task1c.png)
@@ -144,4 +151,40 @@ Condition variable `notFull` (respectively `notEmpty`) is used by producer threa
 
 ## Task 4: Counting Semaphore
 
+Source files:
+
+- `task4/src/CountingSemaphore.java`
+- `task3/src/Main.java` (main program)
+
+To compile and execute:
+```
+javac src/Main.java src/CountingSemaphore.java
+java src/Main
+```
+In order to avoid any spurious wakeups, we used a variable to count the number of signal calls. When the count is negative, we keep checking it in a loop, so that once a thread is notified and asked to wake up, it will be able to proceed. If a spurious wakeup occurs, the loop ensures that the thread goes back to the wait state until the signal count is positive again.
+
+To test our semaphore implementation, we created two simple programs: one that increments a value, demonstrating the semaphore acting as a classic lock, and another that leads to a deadlock scenario, illustrating potential pitfalls when semaphores are misused.
 ## Task 5: Dining Philosophers
+
+Source files:
+
+- `task5/Main.java` (main program)
+
+To compile and execute:
+```
+javac MainA.java 
+java Main
+```
+
+### Task 5a: First simulation
+Using locks, we can simulate the scenario: when a philosopher wants to eat, they first lock the chopstick to their left, then the chopstick to their right. When the philosopher finishes eating and starts thinking, they release both locks.
+
+When running the program, a deadlock occurs because each philosopher tries to acquire the chopsticks in the same order, leading to a circular wait. As the number of threads increases, contention also increases, making deadlocks more likely.
+
+### Task 5b: First simulation
+In order to debug the program , we have used jconsole in order to detect and understand the causes of the deadlocks . 
+
+### Task 5c: First simulation
+In order to prevent deadlocks, we tried to break the cycle by not allowing every philosopher to acquire the chopsticks in the same order; instead, one philosopher acquires them in the opposite order. However, this solution is not starvation-free, as a fast thread can acquire the locks every time, leaving the others waiting.
+To address this, we introduced a notion of thread priority.
+We count how many times each thread calls the eat() method and ensure that the difference between the most-called and least-called thread is always less than a certain integer value, by making the most-called thread busy-wait if necessary.

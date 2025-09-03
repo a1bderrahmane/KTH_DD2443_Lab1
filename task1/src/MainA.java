@@ -17,7 +17,7 @@ public class MainA {
     }
     public static void main(String[] args) {
         int n = 4;
-        Runnable1 runnable = new Runnable1(); // define Runnable1 elsewhere
+        Runnable1 runnable = new Runnable1(); 
         Thread[] threads = Utils.initThread(runnable, n);
         Utils.startThreads(threads);
         Utils.joinThreads(threads);

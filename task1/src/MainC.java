@@ -22,11 +22,29 @@ public class MainC {
 
 }
     public static void main(String[] args) {
-        int[] X_values = { 3, 5, 10, 15, 20, 30, 40, 50, 60 }; 
-        int[] Y_values = { 3, 5, 10, 15, 20, 30, 40, 50, 60 }; 
-        int n = 4;
+        // Check if command line argument is provided
+        if (args.length != 1) {
+            System.err.println("Usage: java MainC <N>");
+            System.err.println("Where N is the number of threads (positive integer)");
+            System.exit(1);
+        }
+        
+        int n = 0;
+        try {
+            n = Integer.parseInt(args[0]);
+            if (n <= 0) {
+                System.err.println("Error: N must be a positive integer");
+                System.exit(1);
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("Error: '" + args[0] + "' is not a valid integer");
+            System.exit(1);
+        }
+        // int[] X_values = { 3, 5, 10, 15, 20, 30, 40, 50, 60 }; 
+        // int[] Y_values = { 3, 5, 10, 15, 20, 30, 40, 50, 60 }; 
+        // int n = 4;
         // runMultipleExperiments(n, X_values, Y_values, "performance_stats.csv");
-        getThreadsStats("Threads_stats.csv");
+        getThreadsStats("Threads_stats.csv",n);
     }
     static long run_experiment(int n)
     {
@@ -94,12 +112,12 @@ public class MainC {
         }
     }
 
-    static void getThreadsStats(String filePath) {
+    static void getThreadsStats(String filePath,int N) {
         final int X = 3, Y = 30;
         StringBuilder sb = new StringBuilder();
         sb.append("n,X,Y,countX,countY,meanX,varianceX,meanY,varianceY\n");
 
-        for (int n = 1; n <= 64; n++) {
+        for (int n = 1; n <= N; n++) {
             long[] elapsed_X = new long[X];
             long[] elapsed_Y = new long[Y];
 
