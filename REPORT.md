@@ -1,7 +1,7 @@
 # Lab 1 - Basic Concurrency in Java
 
-- Group X
-- Lastname, Firstname and Lastname, Firstname
+- Group AA
+- Bouziane Abderrahmane, Bon Alexis
 
 ## Task 1: Simple Synchronization
 
@@ -13,10 +13,12 @@ Source files:
 
 To compile and execute:
 ```
-javac src/MainA.java src/Utils.java
-java src/MainA
+cd src
+javac MainA.java Utils.java
+java MainA
 ```
-In this task we expect the threads to overwrite each time the incremented value , with a final result being less then the result obtained if the program was to run sequentially .
+In this task we expect the threads to overwrite each time the incremented value , with a final result being less then the result obtained if the program was to run sequentially.
+
 ### Task 1b: Synchronized keyword
 Source files:
 
@@ -24,10 +26,12 @@ Source files:
 
 To compile and execute:
 ```
-javac src/MainB.java src/Utils.java
-java src/MainB
+cd src
+javac MainB.java Utils.java
+java MainB
 ```
 After adding the `synchronized` keyword, we prevent the threads from overwriting the variable. As a result, we now get a result similar to running the program sequentially.
+
 ### Task 1c: Synchronization performance
 
 Source files:
@@ -36,8 +40,9 @@ Source files:
 
 To compile and execute:
 ```
-javac src/MainC.java src/Utils.java
-java src/MainC <N>
+cd src
+javac MainC.java Utils.java
+java MainC <N>
 ```
 Where `N` is number of threads to execute with.
 
@@ -158,8 +163,9 @@ Source files:
 
 To compile and execute:
 ```
-javac src/Main.java src/CountingSemaphore.java
-java src/Main
+cd src
+javac Main.java CountingSemaphore.java
+java Main
 ```
 In order to avoid any spurious wakeups, we used a variable to count the number of signal calls. When the count is negative, we keep checking it in a loop, so that once a thread is notified and asked to wake up, it will be able to proceed. If a spurious wakeup occurs, the loop ensures that the thread goes back to the wait state until the signal count is positive again.
 
@@ -181,10 +187,10 @@ Using locks, we can simulate the scenario: when a philosopher wants to eat, they
 
 When running the program, a deadlock occurs because each philosopher tries to acquire the chopsticks in the same order, leading to a circular wait. As the number of threads increases, contention also increases, making deadlocks more likely.
 
-### Task 5b: First simulation
-In order to debug the program , we have used jconsole in order to detect and understand the causes of the deadlocks . 
+### Task 5b: A debug tool
+In order to debug the program , we have used jconsole in order to detect and understand the causes of the deadlocks .
 
-### Task 5c: First simulation
+### Task 5c: A correct solution
 In order to prevent deadlocks, we tried to break the cycle by not allowing every philosopher to acquire the chopsticks in the same order; instead, one philosopher acquires them in the opposite order. However, this solution is not starvation-free, as a fast thread can acquire the locks every time, leaving the others waiting.
 To address this, we introduced a notion of thread priority.
 We count how many times each thread calls the eat() method and ensure that the difference between the most-called and least-called thread is always less than a certain integer value, by making the most-called thread busy-wait if necessary.
